@@ -7,17 +7,14 @@
 
 **Modelos de Implementação:**
 
-|                 | Espaço do Usuário (M:1)                                                    | Espaço do Kernel (1:1)                                                  | Modelo Híbrido (M:N)                                                                 |
-| --------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Definição       | Múltiplas threads de usuário são mapeadas para uma única thread do kernel. | Cada thread de usuário é mapeada diretamente para uma thread do kernel. | Múltiplas threads de usuário são mapeadas para um número menor de threads do kernel. |
-| Características | Eficiência em termos de troca de contexto de thread.                       |
+**Modelos de Implementação:**
 
-Gerenciadas sem intervenção do kernel. | Maior controle e suporte do kernel para gerenciamento de threads.
-
-Trocas de contexto mais custosas. | Combina eficiência e controle do espaço do usuário com o suporte do kernel.
-
-Oferece um equilíbrio entre eficiência e flexibilidade. |
-| Uso em SD | Adequado para sistemas distribuídos onde a eficiência de troca de contexto é crucial. | Menos comum em sistemas distribuídos devido à sobrecarga das trocas de contexto. | Amplamente utilizado em sistemas distribuídos para otimizar desempenho e recursos. |
+|                 | Espaço do Usuário (M:1)                                                               | Espaço do Kernel (1:1)                                                           | Modelo Híbrido (M:N)                                                                 |
+| --------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Definição       | Múltiplas threads de usuário são mapeadas para uma única thread do kernel.            | Cada thread de usuário é mapeada diretamente para uma thread do kernel.          | Múltiplas threads de usuário são mapeadas para um número menor de threads do kernel. |
+| Características | Eficiência em termos de troca de contexto de thread.                                  | Maior controle e suporte do kernel para gerenciamento de threads.                | Combina eficiência e controle do espaço do usuário com o suporte do kernel.          |
+|                 | Gerenciadas sem intervenção do kernel.                                                | Trocas de contexto mais custosas.                                                | Oferece um equilíbrio entre eficiência e flexibilidade.                              |
+| Uso em SD       | Adequado para sistemas distribuídos onde a eficiência de troca de contexto é crucial. | Menos comum em sistemas distribuídos devido à sobrecarga das trocas de contexto. | Amplamente utilizado em sistemas distribuídos para otimizar desempenho e recursos.   |
 
 **Threads em Sistemas não Distribuídos:**
 
@@ -87,17 +84,8 @@ Oferece um equilíbrio entre eficiência e flexibilidade. |
 - Importante ao considerar como um servidor pode ser interrompido.
 - Soluções incluem encerrar abruptamente o cliente ou enviar dados fora de banda para processamento urgente pelo servidor.
 
-| Stateless                                           | Stateful                                                                            |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Não mantêm informações sobre o estado dos clientes. | Processam solicitações com base em informações de solicitações atuais e anteriores. |
-
-| Processam solicitações com base nas informações fornecidas, sem depender de informações de solicitações anteriores.
-
-| Exigem acesso a informações de estado durante o processamento.
-
-Clientes não podem trocar de servidor a cada requisição, apenas em cada conexão |
-| Cada requisição encapsula todas as informações do cliente necessárias para o servidor executar essa requisição.
-
-Exemplo: Servidores web para páginas estáticas. | Pode processar todas as solicitações associadas às mesmas informações de estado ou compartilhar informações de estado entre servidores.
-
-Exemplo: Servidores de banco de dados. |
+| Stateless                                                                                                                                                       | Stateful                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Não mantêm informações sobre o estado dos clientes.                                                                                                             | Processam solicitações com base em informações de solicitações atuais e anteriores.                                                                                            |
+| Processam solicitações com base nas informações fornecidas, sem depender de informações de solicitações anteriores.                                             | Exigem acesso a informações de estado durante o processamento. Clientes não podem trocar de servidor a cada requisição, apenas em cada conexão.                                |
+| Cada requisição encapsula todas as informações do cliente necessárias para o servidor executar essa requisição. Exemplo: Servidores web para páginas estáticas. | Pode processar todas as solicitações associadas às mesmas informações de estado ou compartilhar informações de estado entre servidores. Exemplo: Servidores de banco de dados. |
